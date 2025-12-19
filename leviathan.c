@@ -1,3 +1,4 @@
+
 /*universal downloading solution code named Leviathan
 started developing 12/15/2025
 Location main cafe*/
@@ -6,7 +7,6 @@ Location main cafe*/
 
 #include <stdio.h>
 #include <stdlib.h>//to use system(); and sprintf(); and exit();
-
 //global variables so that we don't have to implement them individually in each function
 char url[405];//variable to store the url of YouTube link (string)
 char command[5000]; 
@@ -27,8 +27,8 @@ void help();//fucntion to display manual
 
 int main(){
 	while(1){
-	int choice;
-	/*
+	int choice = 0;
+	
 	//content inside printf is prone to changes
 	printf("1.Youtube videos\n");
 	printf("2.spotfiy music\n");
@@ -36,41 +36,43 @@ int main(){
 	printf("4.help\n");
 	printf("5.exit\n");
     printf("Enter choice:\n");
-    */
+    
+    /*
     // Clear Screen & Reset
-   // printf("\e[1;1H\e[2J");
-   //including this line causes to clear the screen automatically after the error is occured 
-
-    // --- MENU: Minimalist List ---
-    printf("\033[1;36m   [01]\033[0m Youtube Content\n");
-    printf("\033[1;36m   [02]\033[0m Spotify Stream\n");
-    printf("\033[1;36m   [03]\033[0m Aria Protocol\n");
-    printf("\033[1;36m   [04]\033[0m System Help\n");
-    printf("\033[1;31m   [05]\033[0m Terminate\n\n");
-
-    // --- INPUT: Prompt Style ---
-    printf("\033[1;30m   +--(\033[1;34muser@leviathan\033[1;30m)-[\033[0m~/\033[1;30m]\n");
-    printf("   +-\033[1;36m$\033[0m selection: ");
-    // Source - https://stackoverflow.com/a
-// Posted by Evan Mulawski, modified by community. See post 'Timeline' for change history
-// Retrieved 2025-12-19, License - CC BY-SA 3.0
-
-//scanf("%d *[^\n]", &choice);
-	
+    // printf("\e[1;1H\e[2J");
+    //including this line causes to clear the screen automatically after the error is occured 
+   // --- MENU: Minimalist List ---
+   printf("\033[1;36m   [01]\033[0m Youtube Content\n");
+   printf("\033[1;36m   [02]\033[0m Spotify Stream\n");
+   printf("\033[1;36m   [03]\033[0m Aria Protocol\n");
+   printf("\033[1;36m   [04]\033[0m System Help\n");
+   printf("\033[1;31m   [05]\033[0m Terminate\n\n");
+   
+   // --- INPUT: Prompt Style ---
+   printf("\033[1;30m   +--(\033[1;34muser@leviathan\033[1;30m)-[\033[0m~/\033[1;30m]\n");
+   printf("   +-\033[1;36m$\033[0m selection: ");
+   // Source - https://stackoverflow.com/a
+   // Posted by Evan Mulawski, modified by community. See post 'Timeline' for change history
+   // Retrieved 2025-12-19, License - CC BY-SA 3.0
+   
+   //scanf("%d *[^\n]", &choice);
+   */
+   
 
 	scanf ("%d",&choice);
 	//special condition for exiting and spotify
-	if (choice!=5 && choice!=2){
-	
-    printf("\033[1;36m   Enter url:\n");
+	if (choice==5 || choice==2 )
+	goto continuation;
+    printf("Enter url:\n");
     //scanf is very unsafe to use so we are using fgets
     fgets(url,400,stdin);
 	//switch case code written by bilal line 26-46
     //to flush the input stream:
-     // Flush input
-    int c;
+     //Flush input
+     int c;
+    //int c;
     while ((c = getchar()) != '\n' && c != EOF);
-}
+	continuation:
 	switch(choice){
 		case 1:
 			youtubevideos();
@@ -89,7 +91,8 @@ int main(){
                                     */
 									    case 5:
 										    printf("See you later\n");
-										     exit(EXIT_FAILURE);
+										    return 0;
+										     //exit(EXIT_FAILURE);
 											break;
 										     default:
                                              choice = 0;
