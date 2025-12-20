@@ -1,4 +1,3 @@
-
 /*universal downloading solution code named Leviathan
 started developing 12/15/2025
 Location main cafe*/
@@ -6,10 +5,12 @@ Location main cafe*/
 
 
 #include <stdio.h>
+#include<string.h>
 #include <stdlib.h>//to use system(); and sprintf(); and exit();
 //global variables so that we don't have to implement them individually in each function
 char url[405];//variable to store the url of YouTube link (string)
 char command[5000]; 
+int c;//variable to flush the buffer
  /*
 we are using arrays to store strings because they allow us to modify them afterwards
 if we use char *str = "something";
@@ -60,17 +61,17 @@ int main(){
    
 
 	scanf ("%d",&choice);
+    while ((c = getchar()) != '\n' && c != EOF);
 	//special condition for exiting and spotify
 	if (choice==5 || choice==2 )
 	goto continuation;
     printf("Enter url:\n");
     //scanf is very unsafe to use so we are using fgets
     fgets(url,400,stdin);
+    url[strcspn(url, "\n")] = 0;
 	//switch case code written by bilal line 26-46
     //to flush the input stream:
      //Flush input
-     int c;
-    //int c;
     while ((c = getchar()) != '\n' && c != EOF);
 	continuation:
 	switch(choice){
@@ -113,9 +114,8 @@ void youtubevideos() {
 
     printf("\033[1;36m   1. 240p\n\033[1;36m   2. 360p\n\033[1;36m   3. 480p\n\033[1;36m   4. 720p\n \033[1;36m  5. 1080p\n \033[1;36m  6. Highest\nChoice: ");
     scanf("%d", &choice);
-    //to flush the input stream
-    int c;
     while ((c = getchar()) != '\n' && c != EOF);
+    //to flush the input stream
     /*
     sprintf(); used to create the final command string that is gonna be 
     parsed to system();
@@ -158,8 +158,7 @@ void spotify() {
 /*For taking name or url we are declaring it 
 inside fumction */
 //to flush the input stream so that there are no conflicts regarding the /n that scanf puts at the end
-int c;
-    while ((c = getchar()) != '\n' && c != EOF);
+    
 printf("Enter URL or name of the song: [Artist - song name] \n");
 /*
 scanf(" %[^\n]", url); 
@@ -169,6 +168,7 @@ it will read link but skip abc*/
 
 //A bettet option is to use fgets
 fgets(url,400,stdin);
+url[strcspn(url, "\n")] = 0;
 int choice;
 printf("1.With user authentication\n");
 printf("2.without user authentication\n");
